@@ -39,7 +39,7 @@ export class AppComponent {
         })
     }
     changeAvailable(yourAvailable) {
-        if (yourAvailable.value > 0) {
+        if (yourAvailable.value > 0 && yourAvailable.value <= this.currentLoan.available) {
             yourAvailable=Number(this.currentLoan.available) - yourAvailable.value
             this.currentLoan.available = yourAvailable
             this.currentLoan.isInvested = true
