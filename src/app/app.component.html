@@ -1,0 +1,26 @@
+<div class="container position-relative border bg-light col-8">
+  <h1 class="py-4"> Current Loans </h1>
+  <div *ngFor="let loan of loans" class="p-3 flex-wrap d-flex bg-white border col-12 mb-3 justify-content-between">
+      <h3 class="mt-1 col-8">{{loan?.title}}</h3>
+      <span *ngIf="loan?.isInvested" class="col-2 text-success justify-content-right">Invested</span>
+      <p class="col-8">Analised return: {{loan?.annualised_return}}; Amount: {{loan?.amount}}</p>
+      <button class="btn btn-default border col-3 mb-3 bg-warning" (click)="onButtonClick(loan?.id)">INVEST</button>
+  </div>
+  <p class="text-center">Total amount available for investments: £{{availableSum()}}</p>
+</div>
+<div *ngIf="!isPopupShown" class="modale">
+<div class="my-form container position-absolute top-50 start-50 translate-middle border bg-light col-4 fs-6">
+  <div class="d-flex justify-content-between col"><p class="mt-1 col-10">Invest in Loan</p><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onButtonChange(loan?.id)"></button></div>
+  <p>{{currentLoan?.title}}
+    <br>
+    <br>Amount available: £ {{currentLoan?.available}}
+    <br>Loan ends in: {{currentLoan?.term_remaining | date}}
+    <br>
+    <br>Investment amount (£)
+  </p>
+  <div class="d-flex justify-content-between col">
+    <input type="number" class="col-7" placeholder="0" #yourAvailable>
+    <button class="btn btn-default border col-4 mb-3 bg-warning" (click)="changeAvailable(yourAvailable)" (click)="onButtonChange(loan?.id)">INVEST</button>
+  </div>
+</div>
+</div>
